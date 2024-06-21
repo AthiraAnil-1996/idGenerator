@@ -1,49 +1,49 @@
 <div class="card mx-5">
- <router-outlet></router-outlet>
- <div class="card-body">
-   <div class="table-responsive">
-     <table class="table">
-       <thead class="thead-light">
-         <tr class="align-middle">
+  <router-outlet></router-outlet>
+  <div class="card-body">
+    <div class="table-responsive">
+      <div class="exceldownload">
+        <button class="btn btn-outline-dark my-4" (click)="exportexcel()"><i class="fa-solid fa-download"></i><small class="px-2">EXPORT</small></button>
+      </div>
+      <div data-aos="fade-right">
+      <table class="table" id="excel-table">
+        <thead class="thead-light">
+          <tr class="align-middle">
            <th></th>
-           <th></th>
-           <th></th>
-           <th></th>
-           <th></th>
-           <th></th>
-           <th></th>
-         </tr>
-       </thead>
-       <tbody>
-         <tr class="align-middle">
-           <td>
-             <!-- <img
-               [src]=""
-               alt="image"
-             /> -->
-           </td>
-           <td></td>
-           <td></td>
-           <td></td>
-           <td></td>
-           <td></td>
-           <td>
-             <button class="button">
-               <i class="fa-solid fa-trash-can"></i>
-             </button>
-           </td>
-           <td>
-             <a routerLink="/update" >
-             <button class="button">
-               <i class="fa-solid fa-pen-to-square"></i>
-             </button>
-           </a>
-           </td>
-         </tr>
-       </tbody>
-     </table>
-   </div>
+            <th (click)="sort('id')"><small class="px-2">NAME</small><i class="fa-solid fa-sort"></i></th>
+            <th>CONTACT</th>
+            <th>BATCH</th>
+            <th>APPLIED ON</th>
+            <th>VALID UPTO</th>
+            <th>STATUS</th>
+          </tr>
+        </thead>
+        
+        <tbody>
+          
+          <tr class="align-middle" *ngFor="let i of studentData|orderBy: key:reverse paginate: {itemsPerPage: 5, currentPage: p};" >
+            <td>
+              <img
+                [src]="i.image"
+                alt="image"
+              />
+            </td>
+            <td>{{i.name}}</td>
+            <td>{{i.phone}}</td>
+            <td>{{i.batch}}</td>
+            <td>{{i.Date}}</td>
+            <td>{{i.endDate}}</td>
+            <td><span class="px-2">{{i.status}}</span></td>
+          </tr>
+        
+        </tbody>
+      </table>
+    </div>
+    </div>
+    <div class="paginate">
+      <pagination-controls (pageChange) = "p = $event"></pagination-controls>
+    </div>
+  </div>
  </div>
-</div>
 
 

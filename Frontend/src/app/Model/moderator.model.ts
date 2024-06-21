@@ -1,8 +1,9 @@
-export class BookModel{
+export class ModeratorModel{
  constructor(
-  public author : String,
-  public bookname : String,
-  public imgUrl : String,
-  public synopsis : String
+  public name : String,
+  public email : String,
+  public phone : String,
+  public course : String,
+  public designation : String
  ){}
 }

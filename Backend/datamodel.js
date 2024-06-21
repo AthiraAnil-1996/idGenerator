@@ -27,10 +27,13 @@ const studentSchema = new schema({
 })
 
 const moderatorSchema = new schema({
+ name:String,
  email: String,
+ phone:String,
  password: String,
  course:String,
- batch:String,
+ joiningDate:String,
+ designation:String,
  pin: Number,
 }, {
  versionKey: false
@@ -43,8 +46,13 @@ const adminSchema = new schema({
 }, {
  versionKey: false
 })
-const studentData = new mongoose.model('student', studentSchema, 'students')
+const courseSchema = new schema({
+ course:Array,
+ batch:Array
+})
+const studentData = new mongoose.model('students', studentSchema)
 const moderatorData = new mongoose.model('moderators', moderatorSchema)
 const adminData = new mongoose.model('admins', adminSchema)
+const courseData = new mongoose.model('courses',courseSchema)
 
-module.exports = { studentData, moderatorData, adminData }
+module.exports = { studentData, moderatorData, adminData, courseData }

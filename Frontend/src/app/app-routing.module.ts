@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
-import { BatchComponent } from './admin/batch/batch.component';
-import { ControlsComponent } from './admin/controls/controls.component';
-import { HeaderBatchComponent } from './admin/header-batch/header-batch.component';
-import { HeaderControlsComponent } from './admin/header-controls/header-controls.component';
+import { BatchManagerComponent } from './admin/batch-manager/batch-manager.component';
+import { BmHeaderComponent } from './admin/bm-header/bm-header.component';
+import { FcHeaderComponent } from './admin/fc-header/fc-header.component';
+import { FormControlComponent } from './admin/form-control/form-control.component';
+import { NewmanagerComponent } from './admin/newmanager/newmanager.component';
+import { NmHeaderComponent } from './admin/nm-header/nm-header.component';
 import { AuthGuard } from './auth.guard';
 import { ForgotComponent } from './forgot/forgot.component';
 import { LoginComponent } from './login/login.component';
@@ -18,12 +20,62 @@ import { StatusComponent } from './student/status/status.component';
 import { StudentHomeComponent } from './student/student-home/student-home.component';
 import { StudentComponent } from './student/student/student.component';
 
-const routes: Routes = [{path:"",component:LoginComponent},{path:"newpassword",component:ForgotComponent},{path:"student/:id",canActivate:[AuthGuard], component:StudentComponent,children:[{path:"",component:StudentHomeComponent},{path:"apply",component:ApplyComponent},{path:"status",component:StatusComponent}]},{
-  path:"moderator/:id",canActivate:[AuthGuard],component:ModeratorHomeComponent,children:[{path:"",component:ApplicationsComponent,children:[{path:"",component:HeaderApplicationsComponent}]},{path:"history",component:HistoryComponent,children:[{path:"",component:HeaderHistoryComponent}]}]
-},{path:"admin/:id",canActivate:[AuthGuard],component:AdminHomeComponent,children:[{path:"",component:BatchComponent,children:[{path:"",component:HeaderBatchComponent}]},{path:"controls",component:ControlsComponent,children:[{path:"",component:HeaderControlsComponent}]}]}];
+const routes: Routes = [
+  { path: '', component: LoginComponent },
+  { path: 'newpassword', component: ForgotComponent },
+  {
+    path: 'student/:id',
+    canActivate: [AuthGuard],
+    component: StudentComponent,
+    children: [
+      { path: '', component: StudentHomeComponent },
+      { path: 'apply', component: ApplyComponent },
+      { path: 'status', component: StatusComponent },
+    ],
+  },
+  {
+    path: 'moderator/:id',
+    canActivate: [AuthGuard],
+    component: ModeratorHomeComponent,
+    children: [
+      {
+        path: '',
+        component: ApplicationsComponent,
+        children: [{ path: '', component: HeaderApplicationsComponent }],
+      },
+      {
+        path: 'history',
+        component: HistoryComponent,
+        children: [{ path: '', component: HeaderHistoryComponent }],
+      },
+    ],
+  },
+  {
+    path: 'admin/:id',
+    canActivate: [AuthGuard],
+    component: AdminHomeComponent,
+    children: [
+      {
+        path: '',
+        component: BatchManagerComponent,
+        children: [{ path: '', component: BmHeaderComponent }],
+      },
+      {
+        path: 'editmanager',
+        component: NewmanagerComponent,
+        children: [{ path: '', component: NmHeaderComponent }],
+      },
+      {
+        path: 'formcontrol',
+        component: FormControlComponent,
+        children: [{ path: '', component: FcHeaderComponent }],
+      },
+    ],
+  },
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

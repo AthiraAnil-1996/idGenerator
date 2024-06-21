@@ -1,30 +1,46 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { FormGroup,FormControl,Validators } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AdminService {
+  server_address = 'api'
 
-  constructor() { }
-  form: FormGroup = new FormGroup({
-    $key: new FormControl(null),
-    fullname: new FormControl('', Validators.required),
-    email: new FormControl('', Validators.email),
-    batch: new FormControl('', Validators.required),
-    department: new FormControl(0, Validators.required),
-    isPermanent: new FormControl(false, Validators.required)
+  constructor(private http:HttpClient) { }
+  fetchModerator(data:any){
+    return this.http.post(`${this.server_address}/moderator/fetchmoderator`,data)
 
-  });
-
-  initializeFormGroup(){
-    this.form.setValue({
-      $key: null,
-      fullname: '',
-      email: '',
-      batch: '',
-      department: 0,
-      isPermanent: false
-    });
   }
+
+  updateMod(id:any){
+    
+
+  }
+
+  deleteMod(id:any){
+return this.http.delete(`${this.server_address}/admin/moderator/`+id)
+  }
+  addmanager(data:any){
+    console.log(data)
+    return this.http.post(`${this.server_address}/admin/moderator/add/`,data)
+  }
+
+  updatefetch(id:any){
+    return this.http.get(`${this.server_address}/data/`+id)
+  }
+  update(data:any){
+    return this.http.put(`${this.server_address}/update`,data)
+  }
+
+
+  Course(data:any){
+    console.log(data)
+    return this.http.post(`${this.server_address}/courseaction`,data)
+  }
+  Batch(data:any){
+    console.log(data)
+    return this.http.post(`${this.server_address}/batchaction`,data)
+  }
+
 }
